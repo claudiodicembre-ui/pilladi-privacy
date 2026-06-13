@@ -1,0 +1,16 @@
+name: Medicine Reminders
+
+on:
+  schedule:
+    - cron: '* * * * *'  # ogni minuto
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Edge Function
+        run: |
+          curl -X POST \
+            https://hqdbcysomydkusabxchp.supabase.co/functions/v1/send-medicine-reminders \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxZGJjeXNvbXlka3VzYWJ4Y2hwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjE0NTEsImV4cCI6MjA4NjAzNzQ1MX0.RIXcNj3d88eIIYXmepO5kQj1n5TaFAJOxfSt5BaHcJQ" \
+            --fail-with-body
